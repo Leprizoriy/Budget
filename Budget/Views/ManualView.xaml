@@ -1,0 +1,374 @@
+﻿<UserControl x:Class="Budget.Views.ManualView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Budget.Views"
+             xmlns:viewModel="clr-namespace:Budget.ViewModels"
+             xmlns:model="clr-namespace:Budget.Models"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewModel:ManualViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="190"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0"
+                Background="{DynamicResource PrimaryLightBrush}" CornerRadius="25,0,0,0"/>
+        <Border Grid.Column="1"
+                Background="{DynamicResource PrimaryMaxLightBrush}" CornerRadius="0,25,25,0"/>
+
+        <FlowDocumentPageViewer>
+            <FlowDocument MaxPageHeight="650" MaxPageWidth="690">
+                <Section>
+                    <Paragraph TextAlignment="Center" FontWeight="Bold" Foreground="#edd837">
+                        <Run Text="Основное окно"/>
+                    </Paragraph>
+
+                    <BlockUIContainer>
+                        <Image Height="350" Width="550" Source="{Binding MainWindowImage}" Stretch="Fill"/>
+                    </BlockUIContainer>
+
+                    <List MarkerStyle="None" Foreground="#edd837" FontSize="15">
+                        <ListItem>
+                            <Paragraph>1. Накопления всех категорий по валютам;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>2. Перевод всех накполений в одну валюту по курсу;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>3. Навигация по окнам с информацией;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>4. Окно вывода информации;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>5. Возможные действия для выбраного окна.</Paragraph>
+                        </ListItem>
+                    </List>
+                </Section>
+
+                <Section BreakPageBefore="True">
+                    <Paragraph TextAlignment="Center" FontWeight="Bold" Foreground="#edd837">
+                        <Run Text="Перевод всех накполений в выбранную валюту по курсу"/>
+                    </Paragraph>
+
+                    <BlockUIContainer>
+                        <Image Height="350" Width="350" Source="{Binding CurrencyCourseWindowImage}" Stretch="Fill"/>
+                    </BlockUIContainer>
+
+                    <List MarkerStyle="None" Foreground="#edd837" FontSize="15">
+                        <ListItem>
+                            <Paragraph>1. Все накопления в данной валюте;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>2. Поле для ввода курса относительно валют;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>3. Переведённые накопления в выбранную валюту из валюты (п. 1) по курсу (п. 2).</Paragraph>
+                        </ListItem>
+                    </List>
+                </Section>
+
+                <Section BreakPageBefore="True">
+                    <Paragraph TextAlignment="Center" FontWeight="Bold" Foreground="#edd837">
+                        <Run Text="Окно накоплений"/>
+                    </Paragraph>
+
+                    <BlockUIContainer>
+                        <Image Height="350" Width="550" Source="{Binding IncomeViewImage}" Stretch="Fill"/>
+                    </BlockUIContainer>
+
+                    <List MarkerStyle="None" Foreground="#edd837" FontSize="15">
+                        <ListItem>
+                            <Paragraph>1. Накопления в основной категории;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>2. Накопления в подкатегории;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>3. Переход в окно создания накопительной транзакции;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>4. Переход в окно создания новой категории или подкатегории;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>5. Переход в окно удаления существующей категории или подкатегории;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>6. Переход в окно перевода денег из одной категории или подкатегории в другую категорию или подкатегорию.</Paragraph>
+                        </ListItem>
+                    </List>
+                </Section>
+
+                <Section BreakPageBefore="True">
+                    <Paragraph TextAlignment="Center" FontWeight="Bold" Foreground="#edd837">
+                        <Run Text="3. Кнопка 'Добавить накопления'"/>
+                    </Paragraph>
+
+                    <Paragraph TextAlignment="Left">
+                        <Figure Width="300" HorizontalAnchor="ColumnLeft">
+                            <BlockUIContainer>
+                                <Image Height="180" Width="280" Source="{Binding AddTransactionWindowImage}" Stretch="Fill"/>
+                            </BlockUIContainer>
+                        </Figure>
+
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">1. Название транзакции;</Run>
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">2. Вносимая сумма транзакции;</Run>
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">3. Дата транзакции;</Run>
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">4. Валюта транзакции;</Run>
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">5. Переход в окно распределения суммы транзакции по категориями и подкатегориям.</Run>
+                    </Paragraph>
+
+                    <Paragraph>
+                        <Figure Width="305" HorizontalAnchor="ColumnRight" VerticalAnchor="PageBottom">
+                            <BlockUIContainer>
+                                <Image Height="250" Width="285" Source="{Binding DistributionWindowImage}" Stretch="Fill"/>
+                            </BlockUIContainer>
+                        </Figure>
+
+                        <LineBreak/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">1. Не распределённая сумма(2) с окна 'Новая транзакция';</Run>
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">2. Сумма накоплений для выбранной категории или подкатегории;</Run>
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">2.1. Вносимая сумма для выбранной категории или подкатегории;</Run>
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">2.2. Выбор категории и подкатегории;</Run>
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">2.3. Удаление распределения для выбранной категории;</Run>
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">3. Добавить новое распределение для категории или подкатегории.</Run>
+                    </Paragraph>
+                </Section>
+
+                <Section BreakPageBefore="True">
+                    <Paragraph TextAlignment="Center" FontWeight="Bold" Foreground="#edd837">
+                        <Run Text="4. Кнопка 'Добавить категорию'"/>
+                    </Paragraph>
+
+                    <Paragraph TextAlignment="Left">
+                        <Figure Width="300" HorizontalAnchor="ColumnLeft">
+                            <BlockUIContainer>
+                                <Image Height="180" Width="280" Source="{Binding AddNewCategoryImage}" Stretch="Fill"/>
+                            </BlockUIContainer>
+                        </Figure>
+
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">1. Название транзакции;</Run>
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">2. Выбор валюты;</Run>
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">3. Выбор категории для создания подкатегории.</Run>
+                    </Paragraph>
+
+                    <Paragraph TextAlignment="Center" FontWeight="Bold" Foreground="#edd837">
+                        <LineBreak/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        <Run Text="5. Кнопка 'Удалить категорию'"/>
+                    </Paragraph>
+                    
+                    <Paragraph>
+                        <Figure Width="305" HorizontalAnchor="ColumnRight">
+                            <BlockUIContainer>
+                                <Image Height="180" Width="280" Source="{Binding DeleteCategoryImage}" Stretch="Fill"/>
+                            </BlockUIContainer>
+                        </Figure>
+
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">1. Выбор валюты;</Run>
+                        <LineBreak/>
+                        <Run Foreground="#edd837" FontSize="15">2. Выбор категории или подкатегории.</Run>
+                    </Paragraph>
+                </Section>
+
+                <Section BreakPageBefore="True">
+                    <Paragraph TextAlignment="Center" FontWeight="Bold" Foreground="#edd837">
+                        <Run Text="6. Кнопка 'Обмен денег в категории'"/>
+                    </Paragraph>
+
+                    <BlockUIContainer>
+                        <Image Height="300" Width="500" Source="{Binding ExchangeCategoryImage}" Stretch="Fill"/>
+                    </BlockUIContainer>
+
+                    <List MarkerStyle="None" Foreground="#edd837" FontSize="15">
+                        <ListItem>
+                            <Paragraph>1. Выбор валюты;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>2. Выбор категории или подкатегории с которой будут переводиться накопления;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>3. Выбор категории или подкатегории на которую будут переводиться накопления;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>4. Поле для ввода переводимой суммы.</Paragraph>
+                        </ListItem>
+                    </List>
+                </Section>
+
+                <Section BreakPageBefore="True">
+                    <Paragraph TextAlignment="Center" FontWeight="Bold" Foreground="#edd837">
+                        <Run Text="Окно трат"/>
+                    </Paragraph>
+
+                    <BlockUIContainer>
+                        <Image Height="300" Width="500" Source="{Binding OutgoingViewImage}" Stretch="Fill"/>
+                    </BlockUIContainer>
+
+                    <List MarkerStyle="None" Foreground="#edd837" FontSize="15">
+                        <ListItem>
+                            <Paragraph>1. Фильтр для отображения данных трат;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>2. Отображение списка трат. При нажимании на название столбца информация отфильтруется по типу (А-Я);</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>3. Переход в окно создания траты;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>4. Удаление выделенной транзакции из списка (п. 2);</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>5. Обновление списка транзакции (п. 2).</Paragraph>
+                        </ListItem>
+                    </List>
+                </Section>
+
+                <Section BreakPageBefore="True">
+                    <Paragraph TextAlignment="Center" FontWeight="Bold" Foreground="#edd837">
+                        <Run Text="Фильтр для трат"/>
+                    </Paragraph>
+
+                    <BlockUIContainer>
+                        <Image Height="90" Width="500" Source="{Binding OutgoingFilterImage}" Stretch="Fill"/>
+                    </BlockUIContainer>
+
+                    <List MarkerStyle="None" Foreground="#edd837" FontSize="15">
+                        <ListItem>
+                            <Paragraph>1. Выбор типа транзакции: Income - накопительная, Outgoing - трата, Transfer - обмен между категориями;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>2. Выбор диапазона дат для отображения транзакций;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>3. Выбор валюты для отображения транзакций;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>4. Выбор категории для отображения транзакций. Категории отображаются только после выбора валюты;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>5. Отчистить выбранные настройки в фильтре;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>6. Применить выбранные настройки в фильтре.</Paragraph>
+                        </ListItem>
+                    </List>
+                </Section>
+
+                <Section BreakPageBefore="True">
+                    <Paragraph TextAlignment="Center" FontWeight="Bold" Foreground="#edd837">
+                        <Run Text="3. Кнопка 'Добавить транзакцию'"/>
+                    </Paragraph>
+
+                    <BlockUIContainer>
+                        <Image Height="300" Width="400" Source="{Binding AddActionWindowImage}" Stretch="Fill"/>
+                    </BlockUIContainer>
+
+                    <List MarkerStyle="None" Foreground="#edd837" FontSize="15">
+                        <ListItem>
+                            <Paragraph>1. Название для траты;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>2. Сумма накоплений для выбранной категории или подкатегории;;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>2.1. Вносимая сумма для выбранной категории или подкатегории;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>2.2. Выбор валюты;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>2.3. Выбор категории и подкатегории;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>2.4. Удаление распределения для выбранной категории;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>3. Добавить новое распределение для категории или подкатегории.</Paragraph>
+                        </ListItem>
+                    </List>
+                </Section>
+
+                <Section BreakPageBefore="True">
+                    <Paragraph TextAlignment="Center" FontWeight="Bold" Foreground="#edd837">
+                        <Run Text="Окно настроек"/>
+                    </Paragraph>
+
+                    <BlockUIContainer>
+                        <Image Height="300" Width="500" Source="{Binding SettingsViewImage}" Stretch="Fill"/>
+                    </BlockUIContainer>
+
+                    <List MarkerStyle="None" Foreground="#edd837" FontSize="15">
+                        <ListItem>
+                            <Paragraph>1. Выбор валюты;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>2. Отображение списка настроек для категорий относительно выбранной валюты. При добавлении суммы накоплений
+                                автоматически будет расчитываться процент для выбранных категорий;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>3. Переход в окно создания настройки;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>4. Удаление выделенной настройки из списка (п. 2).</Paragraph>
+                        </ListItem>
+                    </List>
+                </Section>
+
+                <Section BreakPageBefore="True">
+                    <Paragraph TextAlignment="Center" FontWeight="Bold" Foreground="#edd837">
+                        <Run Text="Кнопка 'Добавить настройку'"/>
+                    </Paragraph>
+
+                    <BlockUIContainer>
+                        <Image Height="300" Width="500" Source="{Binding AddSettingWindowImage}" Stretch="Fill"/>
+                    </BlockUIContainer>
+
+                    <List MarkerStyle="None" Foreground="#edd837" FontSize="15">
+                        <ListItem>
+                            <Paragraph>1. Процент для выбранной категории. При добавлении суммы накоплений
+                                автоматически будет расчитываться этот процент для выбранной категории;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>2. Выбор валюты;</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>3. Выбор категории.</Paragraph>
+                        </ListItem>
+                    </List>
+                </Section>
+            </FlowDocument>
+        </FlowDocumentPageViewer>
+    </Grid>
+</UserControl>

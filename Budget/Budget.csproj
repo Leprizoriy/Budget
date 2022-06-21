@@ -1,0 +1,98 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\budget.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Manual\**" />
+    <EmbeddedResource Remove="Manual\**" />
+    <None Remove="Manual\**" />
+    <Page Remove="Manual\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="budget.png" />
+    <None Remove="calendar.png" />
+    <None Remove="clear_filter.png" />
+    <None Remove="close.png" />
+    <None Remove="collapse.png" />
+    <None Remove="collaspe.png" />
+    <None Remove="exchange - Copy.png" />
+    <None Remove="exchange.png" />
+    <None Remove="expand.png" />
+    <None Remove="Resources\budget.png" />
+    <None Remove="Resources\calendar.png" />
+    <None Remove="Resources\clear_filter.png" />
+    <None Remove="Resources\close.png" />
+    <None Remove="Resources\collapse.png" />
+    <None Remove="Resources\exchange.png" />
+    <None Remove="Resources\Manual\AddActionWindow.png" />
+    <None Remove="Resources\Manual\AddNewCategory.png" />
+    <None Remove="Resources\Manual\AddSettingWindow.png" />
+    <None Remove="Resources\Manual\AddTransactionWindow.png" />
+    <None Remove="Resources\Manual\CurrencyCourseWindow.png" />
+    <None Remove="Resources\Manual\DeleteCategory.png" />
+    <None Remove="Resources\Manual\DistributionWindow.png" />
+    <None Remove="Resources\Manual\ExchangeCategory.png" />
+    <None Remove="Resources\Manual\IncomeView.png" />
+    <None Remove="Resources\Manual\MainWindow.png" />
+    <None Remove="Resources\Manual\OutgoingFilter.png" />
+    <None Remove="Resources\Manual\OutgoingView.png" />
+    <None Remove="Resources\Manual\SettingsView.png" />
+    <None Remove="Resources\search.png" />
+    <None Remove="right_arrow.png" />
+    <None Remove="search.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\budget.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\budget.png" />
+    <EmbeddedResource Include="Resources\calendar.png" />
+    <EmbeddedResource Include="Resources\clear_filter.png" />
+    <EmbeddedResource Include="Resources\close.png" />
+    <EmbeddedResource Include="Resources\collapse.png" />
+    <EmbeddedResource Include="Resources\exchange.png" />
+    <EmbeddedResource Include="Resources\Manual\AddActionWindow.png" />
+    <EmbeddedResource Include="Resources\Manual\AddNewCategory.png" />
+    <EmbeddedResource Include="Resources\Manual\AddSettingWindow.png" />
+    <EmbeddedResource Include="Resources\Manual\AddTransactionWindow.png" />
+    <EmbeddedResource Include="Resources\Manual\CurrencyCourseWindow.png" />
+    <EmbeddedResource Include="Resources\Manual\DeleteCategory.png" />
+    <EmbeddedResource Include="Resources\Manual\DistributionWindow.png" />
+    <EmbeddedResource Include="Resources\Manual\ExchangeCategory.png" />
+    <EmbeddedResource Include="Resources\Manual\IncomeView.png" />
+    <EmbeddedResource Include="Resources\Manual\MainWindow.png" />
+    <EmbeddedResource Include="Resources\Manual\OutgoingFilter.png" />
+    <EmbeddedResource Include="Resources\Manual\OutgoingView.png" />
+    <EmbeddedResource Include="Resources\Manual\SettingsView.png" />
+    <EmbeddedResource Include="Resources\search.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="GeneralResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneralResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="GeneralResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GeneralResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

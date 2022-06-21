@@ -1,0 +1,460 @@
+﻿<UserControl x:Class="Budget.Views.OutgoingView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Budget.Views"
+      xmlns:viewModel="clr-namespace:Budget.ViewModels"
+      xmlns:toDoListApp="clr-namespace:Budget"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewModel:OutgoingViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="190"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0"
+                Background="{DynamicResource PrimaryLightBrush}" CornerRadius="25,0,0,0"/>
+        <Border Grid.Column="1"
+                Background="{DynamicResource PrimaryMaxLightBrush}" CornerRadius="0,25,25,0"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="30,20,0,0" HorizontalAlignment="Left" Text="Тип" Foreground="{DynamicResource PrimaryColorBrush}"/>
+            <ComboBox Grid.Column="0" Grid.Row="1" Margin="25,0,5,2" Style="{StaticResource ComboBoxLightColorStyle}" MinHeight="30" MinWidth="70" VerticalAlignment="Bottom" IsEditable="true"
+                      ItemsSource="{Binding TransactionTypes}" SelectedValue="{Binding TransactionType}">
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ComboBoxItemColor}">
+                        <Setter Property="Background" Value="{DynamicResource PrimaryLightBrush}"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryLightBrush}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource PrimaryColorBrush}"/>
+                        <Setter Property="VerticalAlignment" Value="Bottom"/>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
+
+            <TextBlock Grid.Column="1" Grid.Row="0" Margin="5,20,0,0" HorizontalAlignment="Left" Text="Дата от" Foreground="{DynamicResource PrimaryColorBrush}"/>
+            <DatePicker x:Name="DateRangeFromPicker" Grid.Column="1" Grid.Row="1" Margin="5,0,5,5" SelectedDate="{Binding DateFrom, StringFormat='dd/MM/yyyy', TargetNullValue=DateFrom}">
+                <DatePicker.Resources>
+                    <Style TargetType="{x:Type DatePicker}">
+                        <Setter Property="Focusable" Value="False"/>
+                        <Setter Property="CalendarStyle" Value="{DynamicResource StyleDatePickerCalendar}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DatePicker}">
+                                    <Grid x:Name="PART_Root">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <DatePickerTextBox x:Name="PART_TextBox"
+                                                           Background="{DynamicResource PrimaryLightBrush}"
+                                                           Foreground="{DynamicResource PrimaryColorBrush}"
+                                                           BorderThickness="0"
+                                                           HorizontalContentAlignment="Stretch"
+                                                           VerticalContentAlignment="Center"
+                                                           Grid.Column="0"
+                                                           IsReadOnly="True"
+                                                           Focusable="False">
+                                            <DatePickerTextBox.Resources>
+                                                <Style TargetType="{x:Type DatePickerTextBox}">
+                                                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+                                                    <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+                                                    <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type DatePickerTextBox}">
+                                                                <Grid>
+                                                                    <Grid.Resources>
+                                                                        <SolidColorBrush x:Key="WatermarkBrush" Color="Transparent"/>
+                                                                    </Grid.Resources>
+
+                                                                    <Border x:Name="Border" BorderBrush="{DynamicResource PrimaryColorBrush}" BorderThickness="0,0,0,1" Background="Transparent" Opacity="1" Padding="5,5,5,0">
+                                                                        <Grid x:Name="WatermarkContent" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                                                            <Border x:Name="ContentElement" BorderBrush="Transparent" BorderThickness="0" Visibility="Hidden"/>
+                                                                            <Border x:Name="watermark_decorator" BorderBrush="Transparent" BorderThickness="0" Visibility="Hidden">
+                                                                                <ContentControl x:Name="PART_Watermark" Focusable="False" IsHitTestVisible="False" Opacity="0" Padding="2"/>
+                                                                            </Border>
+
+                                                                            <ScrollViewer x:Name="PART_ContentHost" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                                            <Border x:Name="FocusVisual" BorderBrush="Transparent" IsHitTestVisible="False" Opacity="0"/>
+                                                                        </Grid>
+                                                                    </Border>
+                                                                </Grid>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </DatePickerTextBox.Resources>
+                                        </DatePickerTextBox>
+
+                                        <Button x:Name="PART_Button" VerticalAlignment="Stretch">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="OverridesDefaultStyle" Value="True"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Image Name="buttonImage"
+                                                                   Height="15"
+                                                                   HorizontalAlignment="Right"
+                                                                   Margin="5"
+                                                                   Source="{Binding CalendarImage}"
+                                                                   Stretch="Fill"
+                                                                   VerticalAlignment="Stretch"
+                                                                   Width="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}">
+                                                                </Image>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+
+                                        <Popup Name="PART_Popup" StaysOpen="False" AllowsTransparency="True"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+
+            <TextBlock Grid.Column="2" Grid.Row="0" Margin="5,20,0,0" HorizontalAlignment="Left" Text="Дата до" Foreground="{DynamicResource PrimaryColorBrush}"/>
+            <DatePicker x:Name="DateRangeToPicker" Grid.Column="2" Grid.Row="1" Margin="5,0,5,5" SelectedDate="{Binding DateTo, StringFormat='dd/MM/yyyy', TargetNullValue=DateTo}">
+                <DatePicker.Resources>
+                    <Style TargetType="{x:Type DatePicker}">
+                        <Setter Property="Focusable" Value="False"/>
+                        <Setter Property="CalendarStyle" Value="{DynamicResource StyleDatePickerCalendar}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DatePicker}">
+                                    <Grid x:Name="PART_Root">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <DatePickerTextBox x:Name="PART_TextBox"
+                                                           Background="{DynamicResource PrimaryLightBrush}"
+                                                           Foreground="{DynamicResource PrimaryColorBrush}"
+                                                           BorderThickness="0"
+                                                           HorizontalContentAlignment="Stretch"
+                                                           VerticalContentAlignment="Center"
+                                                           Grid.Column="0"
+                                                           IsReadOnly="True"
+                                                           Focusable="False">
+                                            <DatePickerTextBox.Resources>
+                                                <Style TargetType="{x:Type DatePickerTextBox}">
+                                                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+                                                    <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+                                                    <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type DatePickerTextBox}">
+                                                                <Grid>
+                                                                    <Grid.Resources>
+                                                                        <SolidColorBrush x:Key="WatermarkBrush" Color="Transparent"/>
+                                                                    </Grid.Resources>
+
+                                                                    <Border x:Name="Border" BorderBrush="{DynamicResource PrimaryColorBrush}" BorderThickness="0,0,0,1" Background="Transparent" Opacity="1" Padding="5,5,5,0">
+                                                                        <Grid x:Name="WatermarkContent" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                                                            <Border x:Name="ContentElement" BorderBrush="Transparent" BorderThickness="0" Visibility="Hidden"/>
+                                                                            <Border x:Name="watermark_decorator" BorderBrush="Transparent" BorderThickness="0" Visibility="Hidden">
+                                                                                <ContentControl x:Name="PART_Watermark" Focusable="False" IsHitTestVisible="False" Opacity="0" Padding="2"/>
+                                                                            </Border>
+
+                                                                            <ScrollViewer x:Name="PART_ContentHost" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                                            <Border x:Name="FocusVisual" BorderBrush="Transparent" IsHitTestVisible="False" Opacity="0"/>
+                                                                        </Grid>
+                                                                    </Border>
+                                                                </Grid>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </DatePickerTextBox.Resources>
+                                        </DatePickerTextBox>
+
+                                        <Button x:Name="PART_Button" VerticalAlignment="Stretch">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="OverridesDefaultStyle" Value="True"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Image Name="buttonImage"
+                                                                   Height="15"
+                                                                   HorizontalAlignment="Right"
+                                                                   Margin="5"
+                                                                   Source="{Binding CalendarImage}"
+                                                                   Stretch="Fill"
+                                                                   VerticalAlignment="Stretch"
+                                                                   Width="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}">
+                                                                </Image>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+
+                                        <Popup Name="PART_Popup" StaysOpen="False" AllowsTransparency="True"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+
+            <TextBlock Grid.Column="3" Grid.Row="0" Margin="5,20,0,0" HorizontalAlignment="Left" Text="Валюта" Foreground="{DynamicResource PrimaryColorBrush}"/>
+            <ComboBox Grid.Column="3" Grid.Row="1" Style="{StaticResource ComboBoxLightColorStyle}" MinHeight="30" MinWidth="50" Margin="2" VerticalAlignment="Bottom" IsEditable="true"
+                      ItemsSource="{Binding Currencies}" SelectedValue="{Binding Currency}" SelectionChanged="ShowCategories">
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ComboBoxItemColor}">
+                        <Setter Property="Background" Value="{DynamicResource PrimaryLightBrush}"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryLightBrush}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource PrimaryColorBrush}"/>
+                        <Setter Property="VerticalAlignment" Value="Bottom"/>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
+
+            <TextBlock Grid.Column="4" Grid.Row="0" Margin="5,20,0,0" HorizontalAlignment="Left" Text="Категория" Foreground="{DynamicResource PrimaryColorBrush}"/>
+            <ComboBox Grid.Column="4" Grid.Row="1" Style="{StaticResource ComboBoxLightColorStyle}" MinHeight="30" MinWidth="70" Margin="2" VerticalAlignment="Bottom" IsEditable="true"
+                      ItemsSource="{Binding Categories}" SelectedValue="{Binding Category}">
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ComboBoxItemColor}">
+                        <Setter Property="Background" Value="{DynamicResource PrimaryLightBrush}"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryLightBrush}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource PrimaryColorBrush}"/>
+                        <Setter Property="VerticalAlignment" Value="Bottom"/>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
+
+            <Button Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" Margin="0,-13,0,0" MinWidth="60" MaxHeight="35" Click="ClearFilterButton_Click">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="Transparent" BorderBrush="{DynamicResource PrimaryColorBrush}" BorderThickness="1" CornerRadius="3" Margin="3,3,3,5">
+                                        <Grid>
+                                            <Image Height="15"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="5"
+                                                   Source="{Binding ClearFilterImage}"
+                                                   Stretch="Fill"
+                                                   VerticalAlignment="Stretch"
+                                                   Width="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}"/>
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Grid.Column="5" Grid.Row="1" Margin="0,0,0,-13" MinWidth="60" MaxHeight="35" Click="FindButton_Click">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="Transparent" BorderBrush="{DynamicResource PrimaryColorBrush}" BorderThickness="1" CornerRadius="3" Margin="3,3,3,5">
+                                        <Grid>
+                                            <Image Height="15"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="5"
+                                                   Source="{Binding SearchImage}"
+                                                   Stretch="Fill"
+                                                   VerticalAlignment="Stretch"
+                                                   Width="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}"/>
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Border Grid.Row="2" Grid.ColumnSpan="6" Margin="20,10,5,482" Background="{DynamicResource PrimaryMaxLightBrush}" CornerRadius="10"/>
+            <ListView x:Name="TransactionsListView" Grid.Row="2" Grid.ColumnSpan="6" Margin="25,10,5,15" Style="{StaticResource ListViewColorStyle}" SelectionMode="Single" IsSynchronizedWithCurrentItem="True" toDoListApp:GridViewSort.AutoSort="True"
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemsSource="{Binding Transactions}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <Border CornerRadius="2" SnapsToDevicePixels="True"  
+                                            BorderThickness="{TemplateBinding BorderThickness}"   
+                                            BorderBrush="{TemplateBinding BorderBrush}"   
+                                            Background="{TemplateBinding Background}">
+                                        <Border Name="InnerBorder" CornerRadius="1" BorderThickness="1">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition MaxHeight="11" />
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <GridViewRowPresenter Grid.RowSpan="2"   
+                                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"   
+                                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                            </Grid>
+                                        </Border>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryColorBrush}"/>
+                                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                        </Trigger>
+                                        <Trigger Property="IsFocused" Value="True">
+                                            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryDarkBrush}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn toDoListApp:GridViewSort.PropertyName="Type" Header="Тип" Width="70">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Type}" FontSize="12">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Foreground" Value="{DynamicResource PrimaryColorBrush}"/>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn toDoListApp:GridViewSort.PropertyName="ProfileAction.Name" Header="Название" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ProfileAction.Name}" FontSize="12">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Foreground" Value="{DynamicResource PrimaryColorBrush}"/>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn toDoListApp:GridViewSort.PropertyName="CategoryName" Header="Категория" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CategoryName}" FontSize="12">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Foreground" Value="{DynamicResource PrimaryColorBrush}"/>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn toDoListApp:GridViewSort.PropertyName="Date" Header="Дата" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Date, StringFormat='dd/MM/yyyy'}" FontSize="12">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Foreground" Value="{DynamicResource PrimaryColorBrush}"/>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn toDoListApp:GridViewSort.PropertyName="Amount" Header="Стоимость" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Amount}" FontSize="12">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Foreground" Value="{DynamicResource PrimaryColorBrush}"/>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn toDoListApp:GridViewSort.PropertyName="Currency" Header="Валюта" Width="65">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Currency}" FontSize="12">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Foreground" Value="{DynamicResource PrimaryColorBrush}"/>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+        <StackPanel Grid.Column="1">
+            <Button Style="{StaticResource ButtonCornerStyle}"
+                    HorizontalAlignment="Left" Margin="30,20,5,5"
+                    Click="AddTransactionButton_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1" Color="#edd837"/>
+                </Button.Effect>
+                <TextBlock TextAlignment="Center">Добавить <LineBreak/> транзакцию</TextBlock>
+            </Button>
+            
+            <Button Style="{StaticResource ButtonCornerStyle}"
+                    HorizontalAlignment="Left" Margin="30,5,5,5"
+                    Click="DeleteTransactionButton_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1" Color="#edd837"/>
+                </Button.Effect>
+                <TextBlock TextAlignment="Center">Удалить <LineBreak/> транзакцию</TextBlock>
+            </Button>
+            
+            <Button Style="{StaticResource ButtonCornerStyle}"
+                    HorizontalAlignment="Left" Margin="30,5,5,5"
+                    Click="ListUpdateButton_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1" Color="#edd837"/>
+                </Button.Effect>
+                <TextBlock TextAlignment="Center">Обновить <LineBreak/> список</TextBlock>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

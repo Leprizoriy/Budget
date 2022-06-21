@@ -1,0 +1,58 @@
+﻿<Window x:Class="Budget.Views.ErrorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Budget.Views"
+        mc:Ignorable="d"
+        Height="200" Width="400" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" Background="Transparent" AllowsTransparency="True">
+
+    <Border Margin="10" Background="{DynamicResource PrimaryDarkBrush}" BorderBrush="{DynamicResource PrimaryDarkBrush}" CornerRadius="25">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="10" Color="#edd837"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="AppTitleBar" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0" Height="20" Margin="8,2,0,0"
+                   HorizontalAlignment="Center"
+                   Source="{Binding LogoImage}"
+                   Stretch="Fill"
+                   VerticalAlignment="Stretch"
+                   Width="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}"/>
+                <TextBlock Grid.Column="1" Text="Budget" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="{DynamicResource PrimaryColorBrush}" FontSize="14" FontWeight="UltraBlack"
+                       MouseDown="TextBlock_MouseDown"/>
+
+                <Button Grid.Column="4" HorizontalAlignment="Right" Style="{StaticResource ToolbarButtonStyle}" BorderThickness="0" Click="Close_Click">
+                    <Image Height="20" Margin="3,5,12,3"
+                           Source="{Binding CloseImage}"
+                           Stretch="Fill"
+                           VerticalAlignment="Stretch"
+                           Width="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}"/>
+                </Button>
+            </Grid>
+
+            <TextBlock Grid.ColumnSpan="2" Grid.Row="1" Text="Ошибка" Foreground="{DynamicResource PrimaryColorBrush}" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" Margin="5,10"/>
+            <TextBlock Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding Message}" TextWrapping="Wrap" Foreground="{DynamicResource PrimaryColorBrush}" HorizontalAlignment="Left" Margin="50"/>
+        </Grid>
+    </Border>
+</Window>
