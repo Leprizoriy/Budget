@@ -32,7 +32,7 @@
                                     </Grid.RowDefinitions>
 
                                     <TextBlock Grid.Row="0" Text="Сумма" Foreground="{DynamicResource PrimaryColorBrush}" Background="Transparent"/>
-                                    <TextBox Grid.Row="1" x:Name="Amount" Style="{StaticResource TextBoxStyle}" PreviewTextInput="PreviewTextInput" TextChanged="CheckAmountLeft" Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBox Grid.Row="1" x:Name="Amount" Style="{StaticResource TextBoxStyle}" PreviewTextInput="PreviewTextInput" TextChanged="CheckAmountLeft" Text="{Binding Amount, Mode=TwoWay}"/>
                                 </Grid>
 
                                 <Grid Grid.Column="1" Margin="5,0,0,0">
