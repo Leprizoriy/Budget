@@ -370,7 +370,12 @@ namespace Budget.Views
         {
             try
             {
-                double summ = _vm.Transactions.Sum(s => s.Amount);
+                var textBox = sender as TextBox;
+                if (textBox == null) return;
+
+                double.TryParse(textBox.Text, out double amount);
+
+                double summ = _vm.Transactions.Sum(s => s.Amount) + amount;
                 _vm.AmountLeft = (_vm.Amount - summ).TwoSymbolsAfterDot();
                 this.DataContext = _vm;
             }
