@@ -322,7 +322,7 @@ namespace Budget.Views
             try
             {
                 _vm.SubCategories.Clear();
-                if (_vm.Category.Children.Any())
+                if (_vm.Category != null && _vm.Category.Children.Any())
                 {
                     foreach (var child in _vm.Category.Children) _vm.SubCategories.Add(child);
                 }
@@ -341,7 +341,7 @@ namespace Budget.Views
             try
             {
                 _vm.SubCategories2.Clear();
-                if (_vm.Category2.Children.Any())
+                if (_vm.Category2 != null &&_vm.Category2.Children.Any())
                 {
                     foreach (var child in _vm.Category2.Children) _vm.SubCategories2.Add(child);
                 }
