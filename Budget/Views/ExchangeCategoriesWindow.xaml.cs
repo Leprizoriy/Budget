@@ -238,7 +238,7 @@ namespace Budget.Views
                 errorMessage = "Select a category";
             else if (_vm.Category2 == null)
                 errorMessage = "Select a second category";
-            else if (_vm.Category == _vm.Category2)
+            else if (_vm.Category == _vm.Category2 && _vm.SubCategory == _vm.SubCategory2)
                 errorMessage = "You cannot exchange savings for the same category";
             else if ((_vm.SubCategory != null || _vm.SubCategory2 != null) && _vm.SubCategory == _vm.SubCategory2)
                 errorMessage = "You cannot exchange savings for the same subcategory";
