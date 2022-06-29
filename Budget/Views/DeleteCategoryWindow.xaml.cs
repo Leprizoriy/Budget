@@ -206,11 +206,26 @@ namespace Budget.Views
 
                     if(catForDelete != null && !string.IsNullOrEmpty(catForDelete.Name))
                     {
-                        catForDelete.Name = string.Empty;
-                        catForDelete.Uah = 0;
-                        catForDelete.Usd = 0;
-                        catForDelete.Eur = 0;
-                        catForDelete.Pln = 0;
+                        List<GetCategoryChildViewModel> subs = new List<GetCategoryChildViewModel>();
+                        if (_vm.Currency == "UAH")
+                            subs = _incomeViewModel.Children.ToList().FindAll(f => f.UahParentCategoryId == catForDelete.UahParentCategoryId);
+                        else if (_vm.Currency == "EUR")
+                            subs = _incomeViewModel.Children.ToList().FindAll(f => f.EurParentCategoryId == catForDelete.EurParentCategoryId);
+                        else if (_vm.Currency == "USD")
+                            subs = _incomeViewModel.Children.ToList().FindAll(f => f.UsdParentCategoryId == catForDelete.UsdParentCategoryId);
+                        else if (_vm.Currency == "PLN")
+                            subs = _incomeViewModel.Children.ToList().FindAll(f => f.PlnParentCategoryId == catForDelete.PlnParentCategoryId);
+
+                        if (subs.Count > 1)
+                            _incomeViewModel.Children.Remove(catForDelete);
+                        else
+                        {
+                            catForDelete.Name = string.Empty;
+                            catForDelete.Uah = 0;
+                            catForDelete.Usd = 0;
+                            catForDelete.Eur = 0;
+                            catForDelete.Pln = 0;
+                        }
                     }
                     else if (catForDelete != null) _incomeViewModel.Children.Remove(catForDelete);
 
@@ -238,13 +253,13 @@ namespace Budget.Views
                                 if (_vm.SubCategory != null)
                                 {
                                     if (incomeCategory == null && _vm.Currency == "UAH")
-                                        incomeCategory = _incomeViewModel.Children.ToList().Find(f => f.UahParentCategoryId == _vm.SubCategory.UahParentCategoryId);
+                                        incomeCategory = _incomeViewModel.Children.ToList().Find(f => f.Id == _vm.SubCategory.Id);
                                     if (incomeCategory == null && _vm.Currency == "EUR")
-                                        incomeCategory = _incomeViewModel.Children.ToList().Find(f => f.EurParentCategoryId == _vm.SubCategory.EurParentCategoryId);
+                                        incomeCategory = _incomeViewModel.Children.ToList().Find(f => f.Id == _vm.SubCategory.Id);
                                     if (incomeCategory == null && _vm.Currency == "USD")
-                                        incomeCategory = _incomeViewModel.Children.ToList().Find(f => f.UsdParentCategoryId == _vm.SubCategory.UsdParentCategoryId);
+                                        incomeCategory = _incomeViewModel.Children.ToList().Find(f => f.Id == _vm.SubCategory.Id);
                                     if (incomeCategory == null && _vm.Currency == "PLN")
-                                        incomeCategory = _incomeViewModel.Children.ToList().Find(f => f.PlnParentCategoryId == _vm.SubCategory.PlnParentCategoryId);
+                                        incomeCategory = _incomeViewModel.Children.ToList().Find(f => f.Id == _vm.SubCategory.Id);
                                 }
                                 else
                                 {
