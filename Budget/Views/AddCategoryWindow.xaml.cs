@@ -159,8 +159,24 @@ namespace Budget.Views
                                     break;
                             }
 
-                            parent.Id = response.id;
-                            parent.Name = _vm.Name;
+                            if (parent.Id != 0 && parent.Name != null)
+                            {
+                                GetCategoryChildViewModel newParent = new GetCategoryChildViewModel();
+                                newParent.ParentCategoryName = parent.ParentCategoryName;
+                                newParent.UsdParentCategoryId = parent.UsdParentCategoryId;
+                                newParent.UahParentCategoryId = parent.UahParentCategoryId;
+                                newParent.EurParentCategoryId = parent.EurParentCategoryId;
+                                newParent.PlnParentCategoryId = parent.PlnParentCategoryId;
+                                newParent.Id = response.id;
+                                newParent.Name = _vm.Name;
+
+                                _incomeViewModel.Children.Add(newParent);
+                            }
+                            else
+                            {
+                                parent.Id = response.id;
+                                parent.Name = _vm.Name;
+                            }
                         }
                         else
                         {
