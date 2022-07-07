@@ -198,7 +198,19 @@ namespace Budget.Views
                                     break;
                             }
 
-                            _incomeViewModel.Children.Add(child);
+                            var categoryExist = _incomeViewModel.Children.ToList().Find(f => f.ParentCategoryName == child.ParentCategoryName);
+                            if (categoryExist != null)
+                            {
+                                if (child.UsdParentCategoryId != 0)
+                                    categoryExist.UsdParentCategoryId = child.UsdParentCategoryId;
+                                else if (child.UahParentCategoryId != 0)
+                                    categoryExist.UahParentCategoryId = child.UahParentCategoryId;
+                                else if (child.EurParentCategoryId != 0)
+                                    categoryExist.EurParentCategoryId = child.EurParentCategoryId;
+                                else if (child.PlnParentCategoryId != 0)
+                                    categoryExist.PlnParentCategoryId = child.PlnParentCategoryId;
+                            }
+                            else _incomeViewModel.Children.Add(child);
                         }
 
                         Close();
