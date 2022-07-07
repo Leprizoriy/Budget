@@ -227,7 +227,27 @@ namespace Budget.Views
                             catForDelete.Pln = 0;
                         }
                     }
-                    else if (catForDelete != null) _incomeViewModel.Children.Remove(catForDelete);
+                    else if (catForDelete != null)
+                    {
+                        List<string> currencies = new List<string>();
+                        if (catForDelete.EurParentCategoryId != 0) currencies.Add(catForDelete.EurParentCategoryId.ToString());
+                        if (catForDelete.UahParentCategoryId != 0) currencies.Add(catForDelete.UahParentCategoryId.ToString());
+                        if (catForDelete.UsdParentCategoryId != 0) currencies.Add(catForDelete.UsdParentCategoryId.ToString());
+                        if (catForDelete.PlnParentCategoryId != 0) currencies.Add(catForDelete.PlnParentCategoryId.ToString());
+
+                        if (currencies.Count > 1)
+                        {
+                            if (_vm.Currency == "UAH")
+                                catForDelete.UahParentCategoryId = 0;
+                            else if (_vm.Currency == "EUR")
+                                catForDelete.EurParentCategoryId = 0;
+                            else if (_vm.Currency == "USD")
+                                catForDelete.UsdParentCategoryId = 0;
+                            else if (_vm.Currency == "PLN")
+                                catForDelete.PlnParentCategoryId = 0;
+                        }
+                        else _incomeViewModel.Children.Remove(catForDelete);
+                    }
 
                     Close();
                 }
