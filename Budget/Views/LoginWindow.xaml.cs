@@ -163,7 +163,7 @@ namespace Budget.Views
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("'The invocation of the constructor on type 'Budget.Views.IncomeView' that matches the specified binding constraints threw an exception.'"))
+                if (ex.Message.Contains("The invocation of the constructor on type 'Budget.Views.IncomeView' that matches the specified binding constraints threw an exception."))
                 {
                     string message = "Server connection error";
                     var error = new ErrorWindow(message);
