@@ -90,6 +90,9 @@ namespace Budget.Extensions
                 case "You cannot exchange savings for the same subcategory":
                     errorMessage = "Нельзя сделать обмен накоплений для одной и той же подкатегории.";
                     break;
+                case "Server connection error":
+                    errorMessage = "Ошибка соединения с сервером.";
+                    break;
                 default:
                     break;
             }
