@@ -180,6 +180,9 @@ namespace Budget.Views
 
                 foreach (var item in _currencies) transaction.Currencies.Add(item);
                 _vm.Transactions.Add(transaction);
+
+                TransactionListBox.Items.MoveCurrentToLast();
+                TransactionListBox.ScrollIntoView(TransactionListBox.Items.CurrentItem);
             }
             catch (Exception ex)
             {
