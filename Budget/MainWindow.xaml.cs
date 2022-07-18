@@ -147,7 +147,7 @@ namespace Budget
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void ShowCurrencyCourse(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

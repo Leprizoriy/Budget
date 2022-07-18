@@ -71,7 +71,7 @@ namespace Budget.Views
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void LoginUserButton_Click(object sender, RoutedEventArgs e)
