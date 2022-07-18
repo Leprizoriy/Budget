@@ -179,9 +179,9 @@ namespace Budget.Views
 
         private void RememberMe_Click(object sender, MouseButtonEventArgs e)
         {
-            if (_vm.RememberMe == false)
-                _vm.RememberMe = true;
-            else _vm.RememberMe = false;
+            if (RememberMe.IsChecked == false)
+                RememberMe.IsChecked = true;
+            else RememberMe.IsChecked = false;
         }
     }
 }
