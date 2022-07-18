@@ -19,11 +19,18 @@ namespace Budget.ViewModels
 
         double amountLeft;
         private ImageSource calendarImage;
+        private double amountSumm;
 
         public double AmountLeft
         {
             get => amountLeft;
             set => SetProperty(ref amountLeft, value);
+        }
+
+        public double AmountSumm
+        {
+            get => amountSumm;
+            set => SetProperty(ref amountSumm, value);
         }
 
         public ImageSource CalendarImage { get => calendarImage; set => SetProperty(ref calendarImage, value); }
