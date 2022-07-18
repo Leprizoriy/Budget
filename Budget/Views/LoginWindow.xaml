@@ -96,7 +96,7 @@
             </Button>
 
             <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="1" Margin="50,40,0,0">
-                <CheckBox MaxHeight="10" MaxWidth="10" Margin="0,16,0,0" Style="{StaticResource CircleCheckbox}" IsChecked="{Binding RememberMe}"/>
+                <CheckBox x:Name="RememberMe" MaxHeight="10" MaxWidth="10" Margin="0,16,0,0" Style="{StaticResource CircleCheckbox}" IsChecked="{Binding RememberMe}"/>
                 <Label Margin="0,100,0,0" Foreground="{DynamicResource PrimaryDarkColorBrush}" Content="Запомнить меня" MouseDown="RememberMe_Click"/>
             </StackPanel>
 
