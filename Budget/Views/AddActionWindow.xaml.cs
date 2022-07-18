@@ -271,6 +271,26 @@ namespace Budget.Views
             return errorMessage;
         }
 
+        private void CheckAmountSumm(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                var textBox = sender as TextBox;
+                if (textBox == null) return;
+
+                double.TryParse(textBox.Text, out double amount);
+
+                double summ = _vm.Transactions.Sum(s => s.Amount) + amount;
+                _vm.AmountSumm = summ;
+                this.DataContext = _vm;
+            }
+            catch (Exception ex)
+            {
+                var error = new ErrorWindow(ex.Message);
+                error.ShowDialog();
+            }
+        }
+
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
