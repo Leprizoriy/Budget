@@ -8,7 +8,7 @@
         xmlns:models="clr-namespace:Budget.Models"
         xmlns:local="clr-namespace:Budget.Views"
         mc:Ignorable="d"
-        Height="500" Width="450"
+        Height="700" Width="450"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
@@ -140,6 +140,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid x:Name="AppTitleBar" Grid.ColumnSpan="2">
@@ -168,7 +169,7 @@
             </Grid>
 
             <Label Grid.ColumnSpan="2" Grid.Row="1" Content="Новая транзакция" Foreground="{DynamicResource PrimaryColorBrush}" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" Margin="5,10"/>
-            <Button Grid.Column="1" Grid.Row="1" Margin="0,360,50,30" MaxWidth="90" MaxHeight="35" Click="AddTransaction_Click">
+            <Button Grid.Column="1" Grid.Row="2" Margin="0,0,50,40" MaxWidth="90" MaxHeight="35" Click="AddTransaction_Click">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -304,7 +305,7 @@
                 </Grid>
 
                 <ListBox x:Name="TransactionListBox" Margin="-1,5" Background="{DynamicResource PrimaryDarkBrush}" BorderThickness="0" HorizontalContentAlignment="Stretch"
-                     ItemContainerStyle="{StaticResource ListBoxItemStyle}" MaxHeight="180" ItemsSource="{Binding Transactions}">
+                     ItemContainerStyle="{StaticResource ListBoxItemStyle}" MaxHeight="360" ItemsSource="{Binding Transactions}">
                 </ListBox>
 
                 <Button MinHeight="50" Click="NewTransaction_Click">
