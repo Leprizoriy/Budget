@@ -175,7 +175,7 @@ namespace Budget.Services
             var httpRequestMessage = new HttpRequestMessage()
             {
                 Method = HttpMethod.Post,
-                Content = new StringContent(JsonConvert.SerializeObject(req, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8, "application/json")
+                Content = new StringContent(JsonConvert.SerializeObject(req, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, DateTimeZoneHandling = DateTimeZoneHandling.Unspecified }), Encoding.UTF8, "application/json")
             };
 
             var response = await SendRequest($"/Transactions/InitAction", httpRequestMessage).ConfigureAwait(false);
